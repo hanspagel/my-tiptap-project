@@ -1,8 +1,13 @@
 <template>
   <h1>Editor</h1>
   <div class="editor">
-    <editor-toolbar :editor="editor"/>
+    <editor-toolbar :editor="editor" />
     <editor-content :editor="editor" />
+  </div>
+  <h1>Another Editor</h1>
+  <div class="editor">
+    <editor-toolbar :editor="anotherEditor" />
+    <editor-content :editor="anotherEditor" />
   </div>
 </template>
 
@@ -10,6 +15,10 @@
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import EditorToolbar from './EditorToolbar.vue'
+import Collaboration from '@tiptap/extension-collaboration'
+import * as Y from 'yjs'
+
+const ydoc = new Y.Doc()
 
 export default {
   components: {
@@ -20,20 +29,37 @@ export default {
   data() {
     return {
       editor: null,
+      anotherEditor: null,
     }
   },
 
   mounted() {
+    this.anotherEditor = new Editor({
+      extensions: [
+        StarterKit.configure({
+          history: false,
+        }),
+        Collaboration.configure({
+          document: ydoc,
+        }),
+      ],
+    })
+
     this.editor = new Editor({
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          history: false,
+        }),
+        Collaboration.configure({
+          document: ydoc,
+        }),
       ],
       content: `
         <p>
           Hi there,
         </p>
         <p>
-          this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
+          this is a <em>basic</em> example of <strong>Tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
         </p>
         <ul>
           <li>
@@ -63,6 +89,7 @@ export default {
 
   beforeUnmount() {
     this.editor.destroy()
+    this.anotherEditor.destroy()
   },
 }
 </script>

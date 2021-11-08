@@ -7,10 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-collaboration": "^2.0.0-beta.25",
     "@tiptap/starter-kit": "^2.0.0-beta.130",
     "@tiptap/vue-3": "^2.0.0-beta.72",
     "sass": "^1.43.3",
-    "vue": "^3.2.16"
+    "vue": "^3.2.16",
+    "yjs": "^13.5.16"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
