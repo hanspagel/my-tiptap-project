@@ -24,6 +24,7 @@ const provider = new HocuspocusProvider({
   document: ydoc,
   url: 'wss://connect.tiptap.dev',
   name: 'foobar.123',
+  broadcast: false,
 })
 
 export default {
